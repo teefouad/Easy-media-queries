@@ -1,18 +1,27 @@
+var fs = require("fs");
 var resolve = require("path").resolve;
 
 /**
- * The compass importer
- * redirects compass imports to the mixin file
+ * The importer
+ * redirects imports to the mixin file
  *
  * @param path
- * @param _
+ * @param prev
  * @param done
  * @returns {*}
  */
-function importer(path, _, done) {
-  done({
-    file: resolve(__dirname + "/sass/" + path)
-  });
+function importer(path, prev, done) {
+  try {
+    var stat = fs.lstatSync(__dirname + "/sass/" + path + ".scss");
+    
+    if (stat.isFile()) {
+      done({
+        file: resolve(__dirname + "/sass/" + path)
+      });
+    }
+  } catch (e) {
+    return done(null);
+  }
 }
 
 module.exports = importer;
