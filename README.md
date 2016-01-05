@@ -17,7 +17,7 @@ var sass = require("node-sass");
 var easyMediaQueries = require("easy-media-queries");
 
 sass.render({
-  data: '@import "wb-media"; .heading { @include wb-media('<small') { display: none; }; }',
+  data: '@import "wb-media"; .heading { @include wb-media("<small") { display: none; }; }',
   importer: easyMediaQueries
 });
 ```
